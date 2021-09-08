@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+float ortalama(int dizi[],int boyut)
+{
+  float toplam=0.0;
+for(int i=0;i<boyut;i++)
+{
+  toplam=toplam+dizi[i];
+}
+return toplam/boyut;
+}
+float s_sapma(int dizi[],int boyut)
+{
+  float toplam = 0.0, ortalama, standartsapma = 0.0;
+
+    int i;
+
+    for(i=0; i<boyut; ++i)
+    {
+        toplam += dizi[i];
+    }
+
+    ortalama = toplam/boyut;
+
+    for(i=0; i<boyut; ++i){
+        standartsapma += pow(dizi[i] - ortalama, 2);
+    }
+
+    return sqrt(standartsapma/(boyut-1));
+}
+int main(void) {
+  printf("Dizi nasil olusturulacak?\n1-Rastgele Sayilarla\n2- Elle girilecek  ");
+  int secim;
+  scanf("%d",&secim);
+  switch(secim)
+  {
+    case 1 :
+    {
+    printf("Kac adet sayi olusturulsun");
+    int boyut,eleman;
+    scanf("%d",&boyut);
+    int dizi[boyut];
+    int max,min;
+    printf("dizinin min ve max elemanını giriniz: ");
+    scanf("%d %d",&min,&max);
+    for(int i=0;i<boyut;i++)
+    {
+      eleman=rand()%(max-min-1)+min+1;
+      dizi[i]=eleman;
+      eleman=0;
+    }
+    printf("olusturulan rastgele dizi : ");
+    for(int i=0;i<boyut;i++)
+    {
+      printf("%d ",dizi[i]);
+    }
+    printf("Girilen sayiların ortalaması : %.2f ",ortalama(dizi,boyut));
+    printf("  Standart sapma : %.2f ",s_sapma(dizi,boyut));
+
+    break;
+    }
+    case 2:
+    {
+    int boyut;
+    printf("Kac adet sayi girilecek?");
+    scanf("%d",&boyut);
+    int dizi[boyut];
+    printf("Lutfen sayilari girin: ");
+    for(int i=0;i<boyut;i++)
+    {
+      scanf("%d",&dizi[i]);
+    }
+    printf("Girilen sayiların ortalaması : %.2f ",ortalama(dizi,boyut));
+    printf("  Standart sapma : %.2f ",s_sapma(dizi,boyut));
+    break;
+
+
+
+    }
+    default:
+    printf("Lütfen gecerli bir secim yapınız!");
+
+
+  }
+
+  return 0;
+}
